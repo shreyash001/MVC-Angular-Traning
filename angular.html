@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+  </head>
+  <!-- <body>
+    <h2>AngularJS Sample Application</h2>
+
+    <div ng-app="mainApp" ng-controller="studentController">
+      Enter first name: <input type="text" ng-model="student.firstName" /><br />
+      <br />
+      Enter last name: <input type="text" ng-model="student.lastName" /><br />
+      <br />
+      You are entering: {{student.fullName()}}
+    </div>
+
+    <script>
+      var mainApp = angular.module("mainApp", []);
+
+      mainApp.controller("studentController", function ($scope) {
+        $scope.student = {
+          firstName: "Mahesh",
+          lastName: "Parashar",
+
+          fullName: function () {
+            var studentObject;
+            studentObject = $scope.student;
+            return studentObject.firstName + " " + studentObject.lastName;
+          },
+        };
+      });
+    </script>
+  </body> -->
+  <body ng-app="myapp" ng-controller="MyController">
+    <div>
+      <form action="" method="post" ng-submit="formSubmit($event)">
+        <h3>Name</h3>
+        <input type="text" id="name" ng-model="name" />
+        <h3>Email</h3>
+        <input type="text" id="email" ng-model="email" />
+        <h3>Password</h3>
+        <input type="password" id="password" ng-model="password" />
+        <button type="submit" id="saveBtn">Save</button>
+      </form>
+
+      <div ng-show="studentTable">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="st in students">
+                    <td>{{st.name}}</td>
+                    <td>{{st.email}}</td>
+                    <td>{{st.password}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+      </div>
+      <!-- <p>Studet Name <span ng-bind="name"></span></p> -->
+    </div>
+
+    <script>
+      myapp = angular.module("myapp", []);
+
+      myapp.controller("MyController", function ($scope) {
+
+        $scope.students = [];
+        $scope.studentTable = false;
+
+        $scope.resetForm = function () {
+            $scope.name = ""
+            $scope.email = ""
+            $scope.password = ""
+            
+        }
+
+        $scope.formSubmit = function ($event) {
+            event.preventDefault();
+          var formData = {
+            name: $scope.name,
+            email: $scope.email,
+            password: $scope.password,
+          };
+
+          $scope.students.push(formData);
+          $scope.studentTable = true;
+          $scope.resetForm()        
+          console.log($scope.students);
+        };
+
+
+      });
+    </script>
+  </body>
+</html>
